@@ -153,7 +153,7 @@ function get3rdCar(inventory) {
 function getCarInfoByIndex(inventory,index) {
   const car = inventory[index];
   return `This is a car ${inventory[index].car_make} ${inventory[index].car_model} `;
-} 
+}
 
 /**
  * ### Challenge `getLastCarInfo`
@@ -200,7 +200,12 @@ function getCarInfoById(array, id ) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(inventory)
+function sortCarInventory(cars) {
+  cars.sort(function(a, b){
+    return a.car_model - b.car_model
+  });
+};
+
 
 
 /**
@@ -212,11 +217,17 @@ function sortCarInventory(inventory)
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
 */
-function getModelYears(inventory)
-function years() {
+function getModelYears(inventory){
+  const result = [];
+  for ( let i = 0; i < inventory.car_year; i++) {
+    result.push(inventory[i].car_year);
+  }
+  return result;
+};
+
   
  
-}
+
 
 /**
  * ### Challenge `getOlderCars`
