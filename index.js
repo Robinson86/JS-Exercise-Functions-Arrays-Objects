@@ -151,7 +151,6 @@ function get3rdCar(inventory) {
  * it will return `This is a Lincoln Navigator`.
 */
 function getCarInfoByIndex(inventory,index) {
-  const car = inventory[index];
   return `This is a car ${inventory[index].car_make} ${inventory[index].car_model} `;
 }
 
@@ -200,11 +199,16 @@ function getCarInfoById(array, id ) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(cars) {
-  cars.sort(function(a, b){
-    return a.car_model - b.car_model
+function sortCarInventory(inventory) {
+  inventory.sort(function(a,b) {
+    var x = a.car_model.toLowerCase();
+    var y = b.car_model.toLowerCase();
+    if ( x < y ) { return -1;}
+    if ( x > y ) { return 1;}
+    return 0;
   });
-};
+  return inventory;
+}
 
 
 
@@ -219,7 +223,7 @@ function sortCarInventory(cars) {
 */
 function getModelYears(inventory){
   const result = [];
-  for ( let i = 0; i < inventory.car_year; i++) {
+  for ( let i = 0; i < inventory.length; i++) {
     result.push(inventory[i].car_year);
   }
   return result;
@@ -314,8 +318,16 @@ const argTimesTwo = (a) => a * 2;
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
-  /* code here */
+function carMaker( odometer) {
+  let vech = {
+    odometer: odometer, 
+    drive: function (distance){
+      this.odometer += distance;
+      return this.odometer;
+    }
+    
+  }
+  return vech;
 }
 
 /// ////// END OF CHALLENGE /////////
